@@ -4,6 +4,8 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using UniComplainManagement.Forms.Admin;
+using UniComplainManagement.Forms.Student;
 
 namespace UniComplainManagement.Forms
 {
@@ -225,17 +227,40 @@ namespace UniComplainManagement.Forms
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string studentId = txtStudentId.Text.Trim();
+            string userId = txtStudentId.Text.Trim();
             string password = txtPassword.Text;
 
-            if (string.IsNullOrEmpty(studentId) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Please enter both Student ID and Password.", "Login Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter both ID and Password.", "Login Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // TODO: Verify Student ID and Password against your database
-            MessageBox.Show($"Welcome back, {studentId}!", "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // 1. Check for Admin credentials (replace with a database Role check later)
+            if (userId.Equals("admin", StringComparison.OrdinalIgnoreCase) && password == "admin123")
+            {
+                AdminDashboard adminForm = new AdminDashboard();
+                adminForm.FormClosed += (s, args) => this.Show(); // Returns to Login if Admin logs out
+                adminForm.Show();
+                this.Hide();
+                return;
+            }
+
+            // 2. Otherwise verify Student credentials against your database
+            // TODO: Query database for Student ID & Password
+            bool isValidStudent = true; // Placeholder until database is connected
+
+            if (isValidStudent)
+            {
+                StudentDashboard studentForm = new StudentDashboard(userId);
+                studentForm.FormClosed += (s, args) => this.Show(); // Returns to Login if Student logs out
+                studentForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid ID or Password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)

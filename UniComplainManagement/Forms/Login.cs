@@ -167,7 +167,7 @@ namespace UniComplainManagement.Forms
 
             // Login Button
             btnLogin = new Button();
-            btnLogin.Text = "Sign In";
+            btnLogin.Text = "Login";
             btnLogin.Font = new Font("Segoe UI", 11, FontStyle.Bold);
             btnLogin.BackColor = Color.FromArgb(13, 148, 136);
             btnLogin.ForeColor = Color.White;

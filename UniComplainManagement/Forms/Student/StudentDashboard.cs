@@ -299,13 +299,30 @@ namespace UniComplainManagement.Forms.Student
                 "Library & Labs", "17-Nov-2026", "Resolved");
 
             // Double-click row to view details
+
+            // Double-click row to view details
             grid.CellDoubleClick += (s, e) =>
             {
                 if (e.RowIndex >= 0)
                 {
-                    OpenForm(new ComplaintDetails());
+                    DataGridViewRow row = grid.Rows[e.RowIndex];
+
+                    string id = row.Cells["ID"].Value.ToString();
+                    string title = row.Cells["Title"].Value.ToString();
+                    string category = row.Cells["Category"].Value.ToString();
+                    string date = row.Cells["Date"].Value.ToString();
+                    string status = row.Cells["Status"].Value.ToString();
+
+                    OpenForm(new ComplaintDetails(
+                        id,
+                        title,
+                        category,
+                        date,
+                        status
+                    ));
                 }
             };
+
 
             content.Controls.Add(grid);
 
@@ -394,7 +411,7 @@ namespace UniComplainManagement.Forms.Student
                         break;
 
                     case "My Profile":
-                        OpenForm(new StudentProfile());
+                        OpenForm(new StudentProfile(currentStudentId));
                         break;
                 }
             };

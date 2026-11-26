@@ -70,12 +70,6 @@
     <Compile Include="Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Student\ComplaintDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Student\ComplaintDetails.Designer.cs">
-      <DependentUpon>ComplaintDetails.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Student\FeedbackRating.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +81,12 @@
     </Compile>
     <Compile Include="Forms\Student\ComplaintHistory.Designer.cs">
       <DependentUpon>ComplaintHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\ComplaintDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\ComplaintDetails.Designer.cs">
+      <DependentUpon>ComplaintDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Student\StudentProfile.cs">
       <SubType>Form</SubType>

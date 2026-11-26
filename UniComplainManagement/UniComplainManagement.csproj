@@ -76,6 +76,18 @@
     <Compile Include="Forms\Student\ComplaintDetails.Designer.cs">
       <DependentUpon>ComplaintDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Student\FeedbackRating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\FeedbackRating.Designer.cs">
+      <DependentUpon>FeedbackRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\ComplaintHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\ComplaintHistory.Designer.cs">
+      <DependentUpon>ComplaintHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Student\StudentProfile.cs">
       <SubType>Form</SubType>
     </Compile>

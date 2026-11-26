@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -98,8 +99,10 @@ namespace UniComplainManagement.Forms.Student
             AddMenuButton(sidebar, "Dashboard", 205, true);
             AddMenuButton(sidebar, "Submit Complaint", 260, false);
             AddMenuButton(sidebar, "My Complaints", 315, false);
+            AddMenuButton(sidebar, "Feedback & Rating", 425, false);
+            AddMenuButton(sidebar, "Complaint History", 480, false);
             AddMenuButton(sidebar, "Notifications", 370, false);
-            AddMenuButton(sidebar, "My Profile", 425, false);
+            AddMenuButton(sidebar, "My Profile", 535, false);
 
             // Logout Button
             Button logout = new Button();
@@ -154,7 +157,6 @@ namespace UniComplainManagement.Forms.Student
             studentId.AutoSize = true;
             header.Controls.Add(studentId);
 
-            // Position Student ID on the right
             header.Resize += (s, e) =>
             {
                 studentId.Location = new Point(
@@ -167,8 +169,6 @@ namespace UniComplainManagement.Forms.Student
             content.AutoScroll = true;
             content.BackColor = background;
 
-            // IMPORTANT: Add DockStyle.Fill (content) BEFORE DockStyle.Top (header)
-            // so content starts cleanly below the 75px header instead of behind it.
             mainPanel.Controls.Add(content);
             mainPanel.Controls.Add(header);
 
@@ -205,7 +205,7 @@ namespace UniComplainManagement.Forms.Student
 
             submit.Click += (s, e) =>
             {
-                OpenForm(new SubmitComplaint());
+                OpenForm(new SubmitComplaint(currentStudentId));
             };
 
             content.Controls.Add(submit);
@@ -291,12 +291,12 @@ namespace UniComplainManagement.Forms.Student
                 "Finance", "19-Nov-2026", "In Progress");
 
             grid.Rows.Add(
-                "CMP-001", "Internet Issue",
-                "IT & Networking", "20-Nov-2026", "Pending");
+                "CMP-003", "ID Card Issue",
+                "Administration", "18-Nov-2026", "Pending");
 
             grid.Rows.Add(
-                "CMP-003", "ID Card Issue",
-                "Administration", "17-Nov-2026", "Resolved");
+                "CMP-004", "Library Issue",
+                "Library & Labs", "17-Nov-2026", "Resolved");
 
             // Double-click row to view details
             grid.CellDoubleClick += (s, e) =>
@@ -309,19 +309,24 @@ namespace UniComplainManagement.Forms.Student
 
             content.Controls.Add(grid);
 
-            // Keep Submit button and Table aligned when form resizes
+            // Keep Submit Button and Table Aligned
             content.Resize += (s, e) =>
             {
-                int rightEdge = Math.Max(880, content.ClientSize.Width - 30);
-                submit.Location = new Point(rightEdge - submit.Width, 32);
+                int rightEdge = Math.Max(
+                    880, content.ClientSize.Width - 30);
+
+                submit.Location = new Point(
+                    rightEdge - submit.Width, 32);
+
                 grid.Width = rightEdge - 30;
             };
         }
 
-        // Helper to open child forms cleanly
+        // Open Child Forms
         private void OpenForm(Form form)
         {
             form.FormClosed += (s, e) => this.Show();
+
             form.Show();
             this.Hide();
         }
@@ -367,15 +372,27 @@ namespace UniComplainManagement.Forms.Student
                 {
                     case "Dashboard":
                         return;
+
                     case "Submit Complaint":
-                        OpenForm(new SubmitComplaint());
+                        OpenForm(new SubmitComplaint(currentStudentId));
                         break;
+
                     case "My Complaints":
                         OpenForm(new MyComplaints());
                         break;
+
+                    case "Feedback & Rating":
+                        OpenForm(new FeedbackRating(currentStudentId));
+                        break;
+
+                    case "Complaint History":
+                        OpenForm(new ComplaintHistory(currentStudentId));
+                        break;
+
                     case "Notifications":
                         OpenForm(new Notifications());
                         break;
+
                     case "My Profile":
                         OpenForm(new StudentProfile());
                         break;
